@@ -45,3 +45,15 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# ================================
+# compile and build directories
+# ================================
+NgMapAnimator/bin/*
+NgMapAnimator/obj/*
+NgMapAnimator.Core/bin/*
+NgMapAnimator.Core/obj/*
+YOverlayPngs/bin/*
+YOverlayPngs/obj/*
+ZConsoleApplication/bin/*
+ZConsoleApplication/obj/*
