@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Miktemk;
 
 namespace NgMapAnimator.Core
 {
@@ -69,8 +70,8 @@ namespace NgMapAnimator.Core
                     var matchZoomPoint = parseFinishPoint.Match(id2);
                     if (!matchZoomPoint.Success)
                         throw new Exception("Cannot parse finish point: " + id2);
-                    var x = matchZoomPoint.Groups[1].Value.ParseThisDouble();
-                    var y = matchZoomPoint.Groups[2].Value.ParseThisDouble();
+                    var x = matchZoomPoint.Groups[1].Value.ParseDoubleOrDefault();
+                    var y = matchZoomPoint.Groups[2].Value.ParseDoubleOrDefault();
                     GenerateTransition(imgPath, FinishImageFilename, FramesEachMap, FramesFadeTransition, x, y, ZoomFactorFinish);
                 }
                 else
@@ -162,15 +163,15 @@ namespace NgMapAnimator.Core
                 float progressTotal = (float)frame / framesTotal;
                 float progressImg2 = (float)(frame - framesTotal + framesImg2) / framesImg2;
 
-                rectDest1.X = (int)Utils.LinearX(0, rectDest1_x2, progressTotal);
-                rectDest1.Y = (int)Utils.LinearX(0, rectDest1_y2, progressTotal);
-                rectDest1.Width = (int)Utils.LinearX(OutputWidth, rectDest1_w2, progressTotal);
-                rectDest1.Height = (int)Utils.LinearX(OutputHeight, rectDest1_h2, progressTotal);
+                rectDest1.X = (int)UtilsMath.LinearX(0, rectDest1_x2, progressTotal);
+                rectDest1.Y = (int)UtilsMath.LinearX(0, rectDest1_y2, progressTotal);
+                rectDest1.Width = (int)UtilsMath.LinearX(OutputWidth, rectDest1_w2, progressTotal);
+                rectDest1.Height = (int)UtilsMath.LinearX(OutputHeight, rectDest1_h2, progressTotal);
 
-                rectDest2.X = (int)Utils.LinearX(rectDest2_x1, 0, progressTotal);
-                rectDest2.Y = (int)Utils.LinearX(rectDest2_y1, 0, progressTotal);
-                rectDest2.Width = (int)Utils.LinearX(rectDest2_w1, OutputWidth, progressTotal);
-                rectDest2.Height = (int)Utils.LinearX(rectDest2_h1, OutputHeight, progressTotal);
+                rectDest2.X = (int)UtilsMath.LinearX(rectDest2_x1, 0, progressTotal);
+                rectDest2.Y = (int)UtilsMath.LinearX(rectDest2_y1, 0, progressTotal);
+                rectDest2.Width = (int)UtilsMath.LinearX(rectDest2_w1, OutputWidth, progressTotal);
+                rectDest2.Height = (int)UtilsMath.LinearX(rectDest2_h1, OutputHeight, progressTotal);
 
                 Bitmap image = new Bitmap(OutputWidth, OutputHeight);
                 Graphics ggg = Graphics.FromImage(image);

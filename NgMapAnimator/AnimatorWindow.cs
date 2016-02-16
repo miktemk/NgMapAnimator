@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Miktemk;
+using Miktemk.Winforms;
 
 namespace NgMapAnimator
 {
@@ -60,36 +62,36 @@ FINISH-POINT:45,30,Orbetello",
             pictureBoxFinishing.ImageLocation = config.FinishImageFilename;
             txtOutputFolder.Text = config.OutputFolder;
 
-            WinformUtils.BindTextArea(txtCommands,
+            WinformBinds.BindTextArea(txtCommands,
                 () => { return config.Commands; },
                 (sss) => { config.Commands = sss.Trim(); });
-            WinformUtils.BindTextField(txtFolderFullRes,
+            WinformBinds.BindTextField(txtFolderFullRes,
                 () => { return config.FullResImageFolder; },
                 (sss) => { config.FullResImageFolder = sss; });
-            WinformUtils.MakeTextFieldNumeric(txtZoomF);
-            WinformUtils.BindTextField(txtZoomF,
+            WinformBinds.MakeTextFieldNumeric(txtZoomF);
+            WinformBinds.BindTextField(txtZoomF,
                 () => { return config.ZoomFactor; },
-                (sss) => { config.ZoomFactor = Utils.ParseThisDouble(sss, 2); });
-            WinformUtils.MakeTextFieldNumeric(txtZoomFinish);
-            WinformUtils.BindTextField(txtZoomFinish,
+                (sss) => { config.ZoomFactor = sss.ParseDoubleOrDefault(2); });
+            WinformBinds.MakeTextFieldNumeric(txtZoomFinish);
+            WinformBinds.BindTextField(txtZoomFinish,
                 () => { return config.ZoomFactorFinish; },
-                (sss) => { config.ZoomFactorFinish = Utils.ParseThisDouble(sss, 2); });
-            WinformUtils.MakeTextFieldNumeric(txtOffsetX);
-            WinformUtils.BindTextField(txtOffsetX,
+                (sss) => { config.ZoomFactorFinish = sss.ParseDoubleOrDefault(2); });
+            WinformBinds.MakeTextFieldNumeric(txtOffsetX);
+            WinformBinds.BindTextField(txtOffsetX,
                 () => { return config.OffsetX; },
-                (sss) => { config.OffsetX = Utils.ParseThisDouble(sss, 0); });
-            WinformUtils.MakeTextFieldNumeric(txtOffsetY);
-            WinformUtils.BindTextField(txtOffsetY,
+                (sss) => { config.OffsetX = sss.ParseDoubleOrDefault(0); });
+            WinformBinds.MakeTextFieldNumeric(txtOffsetY);
+            WinformBinds.BindTextField(txtOffsetY,
                 () => { return config.OffsetY; },
-                (sss) => { config.OffsetY = Utils.ParseThisDouble(sss, 0); });
-            WinformUtils.MakeTextFieldNumeric(txtHoldFirst);
-            WinformUtils.BindTextField(txtHoldFirst,
+                (sss) => { config.OffsetY = sss.ParseDoubleOrDefault(0); });
+            WinformBinds.MakeTextFieldNumeric(txtHoldFirst);
+            WinformBinds.BindTextField(txtHoldFirst,
                 () => { return config.FramesHoldFirstFrame; },
-                (sss) => { config.FramesHoldFirstFrame = Utils.ParseThisInt(sss, 0); });
-            WinformUtils.MakeTextFieldNumeric(txtHoldLast);
-            WinformUtils.BindTextField(txtHoldLast,
+                (sss) => { config.FramesHoldFirstFrame = sss.ParseIntOrDefault(0); });
+            WinformBinds.MakeTextFieldNumeric(txtHoldLast);
+            WinformBinds.BindTextField(txtHoldLast,
                 () => { return config.FramesHoldLastImage; },
-                (sss) => { config.FramesHoldLastImage = Utils.ParseThisInt(sss, 0); });
+                (sss) => { config.FramesHoldLastImage = sss.ParseIntOrDefault(0); });
         }
 
         private void mapImmitatorControl_MapChanged(string mapId)
